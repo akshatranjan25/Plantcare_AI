@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PlantCare AI</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+	<main class="container">
+		<section class="card">
+			<h1>PlantCare AI</h1>
+			<p class="subtitle">Upload a plant leaf image to classify disease status using a fine-tuned transfer learning model.</p>
+
+			<form method="POST" enctype="multipart/form-data" class="upload-form">
+				<label for="image" class="file-label">Select Leaf Image</label>
+				<input id="image" type="file" name="image" accept="image/*" required>
+				<small id="selected-file" class="hint">No file selected</small>
+				<button type="submit">Analyze Image</button>
+			</form>
+
+			<div id="client-preview-wrapper" class="client-preview hidden">
+				<p>Preview</p>
+				<img id="client-preview" alt="Selected image preview" class="preview-image">
+			</div>
+
+			{% if error %}
+				<div class="message error">{{ error }}</div>
+			{% endif %}
+
+			{% if prediction %}
+				<div class="result-box">
+					<h2>Prediction Result</h2>
+					<p><strong>Class:</strong> {{ prediction }}</p>
+					<p><strong>Status:</strong> {{ health_status }}</p>
+					<p><strong>Confidence:</strong> {{ '%.2f'|format(confidence * 100) }}%</p>
+
+					{% if uploaded_image %}
+						<img src="{{ uploaded_image }}" alt="Uploaded leaf image" class="preview-image">
+					{% endif %}
+				</div>
+			{% endif %}
+		</section>
+	</main>
+
+	<script>
+		const imageInput = document.getElementById('image');
+		const selectedFile = document.getElementById('selected-file');
+		const previewWrapper = document.getElementById('client-preview-wrapper');
+		const previewImage = document.getElementById('client-preview');
+
+		imageInput.addEventListener('change', function () {
+			const file = this.files && this.files[0];
+
+			if (!file) {
+				selectedFile.textContent = 'No file selected';
+				previewWrapper.classList.add('hidden');
+				previewImage.removeAttribute('src');
+				return;
+			}
+
+			selectedFile.textContent = `Selected: ${file.name}`;
+
+			const reader = new FileReader();
+			reader.onload = function (event) {
+				previewImage.src = event.target.result;
+				previewWrapper.classList.remove('hidden');
+			};
+			reader.readAsDataURL(file);
+		});
+	</script>
+</body>
+</html>

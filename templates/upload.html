@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PlantCare AI | Upload</title>
+	<style>
+		:root {
+			--bg: #f3faf4;
+			--card: #ffffff;
+			--primary: #1f8f43;
+			--primary-dark: #166534;
+			--muted: #4b5563;
+			--text: #1f2937;
+			--border: #d1d5db;
+			--error-bg: #fee2e2;
+			--error-text: #991b1b;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			font-family: Arial, Helvetica, sans-serif;
+			background: var(--bg);
+			color: var(--text);
+		}
+
+		.navbar {
+			background: #ffffff;
+			border-bottom: 1px solid #e5e7eb;
+		}
+
+		.nav-wrap {
+			max-width: 900px;
+			margin: 0 auto;
+			padding: 14px 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 14px;
+			flex-wrap: wrap;
+		}
+
+		.brand {
+			text-decoration: none;
+			color: #166534;
+			font-weight: 700;
+		}
+
+		.nav-links {
+			display: flex;
+			gap: 14px;
+			flex-wrap: wrap;
+		}
+
+		.nav-links a {
+			text-decoration: none;
+			color: var(--muted);
+			font-weight: 600;
+		}
+
+		.nav-links a.active,
+		.nav-links a:hover {
+			color: #14532d;
+		}
+
+		.container {
+			min-height: calc(100vh - 70px);
+			display: grid;
+			place-items: center;
+			padding: 24px;
+		}
+
+		.card {
+			width: 100%;
+			max-width: 640px;
+			background: var(--card);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 24px;
+		}
+
+		h1 {
+			margin-top: 0;
+			margin-bottom: 8px;
+		}
+
+		p {
+			margin-top: 0;
+			color: var(--muted);
+			line-height: 1.6;
+		}
+
+		.upload-form {
+			display: grid;
+			gap: 12px;
+			margin-top: 14px;
+		}
+
+		label {
+			font-weight: 600;
+		}
+
+		input[type="file"] {
+			padding: 10px;
+			border: 1px solid var(--border);
+			border-radius: 8px;
+			background: #f9fafb;
+		}
+
+		button {
+			border: none;
+			border-radius: 8px;
+			padding: 11px 16px;
+			background: var(--primary);
+			color: #fff;
+			font-weight: 700;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background: var(--primary-dark);
+		}
+
+		.preview {
+			margin-top: 14px;
+			border: 1px dashed #cbd5e1;
+			border-radius: 10px;
+			padding: 10px;
+			background: #f8fafc;
+			display: none;
+		}
+
+		.preview img {
+			width: 100%;
+			max-width: 320px;
+			border-radius: 8px;
+			border: 1px solid #d1d5db;
+		}
+
+		.error {
+			margin-top: 10px;
+			border: 1px solid #fecaca;
+			background: var(--error-bg);
+			color: var(--error-text);
+			border-radius: 8px;
+			padding: 10px;
+		}
+	</style>
+</head>
+<body>
+	<header class="navbar">
+		<div class="nav-wrap">
+			<a href="{{ url_for('home') }}" class="brand">PlantCare AI</a>
+			<nav class="nav-links">
+				<a href="{{ url_for('home') }}">Home</a>
+				<a href="{{ url_for('about') }}">About</a>
+				<a class="active" href="{{ url_for('upload_page') }}">Upload</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="container">
+		<section class="card">
+			<h1>Upload Plant Leaf Image</h1>
+			<p>Select a clear leaf image and submit it for AI-based disease detection.</p>
+
+			{% if error %}
+				<div class="error">{{ error }}</div>
+			{% endif %}
+
+			<form method="POST" enctype="multipart/form-data" class="upload-form" action="{{ url_for('upload_page') }}">
+				<label for="image">Choose Image</label>
+				<input id="image" type="file" name="image" accept="image/*" required>
+				<button type="submit">Detect Disease</button>
+			</form>
+
+			<div class="preview" id="previewBox">
+				<p><strong>Preview:</strong></p>
+				<img id="previewImage" alt="Leaf preview">
+			</div>
+		</section>
+	</main>
+
+	<script>
+		const input = document.getElementById('image');
+		const previewBox = document.getElementById('previewBox');
+		const previewImage = document.getElementById('previewImage');
+
+		input.addEventListener('change', function () {
+			const file = this.files && this.files[0];
+			if (!file) {
+				previewBox.style.display = 'none';
+				previewImage.removeAttribute('src');
+				return;
+			}
+
+			const reader = new FileReader();
+			reader.onload = function (event) {
+				previewImage.src = event.target.result;
+				previewBox.style.display = 'block';
+			};
+			reader.readAsDataURL(file);
+		});
+	</script>
+</body>
+</html>

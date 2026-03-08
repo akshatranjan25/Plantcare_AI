@@ -1,0 +1,34 @@
+# Python cache/bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment/secrets
+.env
+.env.*
+
+# Flask/runtime files
+instance/
+*.log
+
+# Uploads generated at runtime
+uploads/*
+!uploads/.gitkeep
+
+# ML model artifacts (often large)
+# model/*.pkl
+# model/*.h5
+# model/*.keras
+# model/*.joblib
+# model/*.onnx
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/.history/
+

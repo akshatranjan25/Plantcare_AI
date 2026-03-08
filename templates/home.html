@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PlantCare AI | Home</title>
+	<style>
+		:root {
+			--bg: #f4fbf4;
+			--card: #ffffff;
+			--primary: #1b8f3f;
+			--primary-dark: #146e30;
+			--text: #1f2937;
+			--muted: #4b5563;
+			--border: #d1d5db;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			font-family: Arial, Helvetica, sans-serif;
+			background: var(--bg);
+			color: var(--text);
+		}
+
+		.navbar {
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			background: #ffffff;
+			border-bottom: 1px solid #e5e7eb;
+		}
+
+		.nav-wrap {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 14px 20px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+		}
+
+		.brand {
+			font-size: 1.1rem;
+			font-weight: 700;
+			color: var(--primary-dark);
+			text-decoration: none;
+		}
+
+		.nav-links {
+			display: flex;
+			gap: 14px;
+			flex-wrap: wrap;
+		}
+
+		.nav-links a {
+			text-decoration: none;
+			color: var(--muted);
+			font-weight: 600;
+		}
+
+		.nav-links a.active,
+		.nav-links a:hover {
+			color: var(--primary-dark);
+		}
+
+		.hero {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 56px 20px 30px;
+			display: grid;
+			gap: 22px;
+		}
+
+		.hero h1 {
+			margin: 0;
+			font-size: clamp(1.9rem, 3vw, 3rem);
+			line-height: 1.2;
+		}
+
+		.hero p {
+			margin: 0;
+			max-width: 760px;
+			color: var(--muted);
+			line-height: 1.6;
+		}
+
+		.cta {
+			display: inline-block;
+			width: fit-content;
+			padding: 11px 18px;
+			border-radius: 10px;
+			background: var(--primary);
+			color: #fff;
+			text-decoration: none;
+			font-weight: 700;
+		}
+
+		.cta:hover {
+			background: var(--primary-dark);
+		}
+
+		.section {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 10px 20px 36px;
+		}
+
+		.section h2 {
+			margin: 0 0 16px;
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 16px;
+		}
+
+		.card {
+			background: var(--card);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 18px;
+		}
+
+		.card h3 {
+			margin: 0 0 8px;
+			color: var(--primary-dark);
+		}
+
+		.card p {
+			margin: 0;
+			color: var(--muted);
+			line-height: 1.5;
+		}
+
+		.stat {
+			text-align: center;
+		}
+
+		.stat strong {
+			display: block;
+			font-size: 1.7rem;
+			color: var(--primary-dark);
+			margin-bottom: 6px;
+		}
+
+		@media (max-width: 880px) {
+			.grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header class="navbar">
+		<div class="nav-wrap">
+			<a href="{{ url_for('home') }}" class="brand">PlantCare AI</a>
+			<nav class="nav-links">
+				<a class="active" href="{{ url_for('home') }}">Home</a>
+				<a href="{{ url_for('about') }}">About</a>
+				<a href="{{ url_for('upload_page') }}">Upload</a>
+			</nav>
+		</div>
+	</header>
+
+	<section class="hero">
+		<h1>Smarter Plant Disease Detection with AI</h1>
+		<p>
+			PlantCare AI helps farmers, students, and gardeners identify plant diseases quickly using
+			transfer learning on MobileNetV2. Upload a leaf image and receive instant classification.
+		</p>
+		<a class="cta" href="{{ url_for('upload_page') }}">Try Detection Now</a>
+	</section>
+
+	<section class="section">
+		<h2>Feature Highlights</h2>
+		<div class="grid">
+			<article class="card">
+				<h3>Instant Detection</h3>
+				<p>Get prediction results in seconds after uploading a plant leaf image.</p>
+			</article>
+			<article class="card">
+				<h3>High Accuracy</h3>
+				<p>Uses transfer learning with MobileNetV2 for reliable disease classification.</p>
+			</article>
+			<article class="card">
+				<h3>Easy to Use</h3>
+				<p>Simple interface that works for agricultural experts and home gardeners alike.</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="section">
+		<h2>Model Statistics</h2>
+		<div class="grid">
+			<article class="card stat">
+				<strong>38+</strong>
+				<span>Diseases & classes covered</span>
+			</article>
+			<article class="card stat">
+				<strong>95%</strong>
+				<span>Target classification accuracy</span>
+			</article>
+			<article class="card stat">
+				<strong>10+</strong>
+				<span>Plant species supported</span>
+			</article>
+		</div>
+	</section>
+</body>
+</html>

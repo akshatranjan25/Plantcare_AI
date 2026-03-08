@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PlantCare AI | About</title>
+	<style>
+		:root {
+			--bg: #f6faf6;
+			--card: #ffffff;
+			--primary: #1b8f3f;
+			--text: #1f2937;
+			--muted: #4b5563;
+			--border: #d1d5db;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			font-family: Arial, Helvetica, sans-serif;
+			background: var(--bg);
+			color: var(--text);
+		}
+
+		.navbar {
+			background: #fff;
+			border-bottom: 1px solid #e5e7eb;
+		}
+
+		.nav-wrap {
+			max-width: 1000px;
+			margin: 0 auto;
+			padding: 14px 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+
+		.brand {
+			text-decoration: none;
+			color: #166534;
+			font-weight: 700;
+		}
+
+		.nav-links {
+			display: flex;
+			gap: 14px;
+			flex-wrap: wrap;
+		}
+
+		.nav-links a {
+			text-decoration: none;
+			color: var(--muted);
+			font-weight: 600;
+		}
+
+		.nav-links a.active,
+		.nav-links a:hover {
+			color: #14532d;
+		}
+
+		.container {
+			max-width: 1000px;
+			margin: 0 auto;
+			padding: 30px 20px 40px;
+			display: grid;
+			gap: 16px;
+		}
+
+		.card {
+			background: var(--card);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 18px;
+		}
+
+		h1, h2 { margin-top: 0; }
+
+		p {
+			color: var(--muted);
+			line-height: 1.6;
+		}
+
+		ul {
+			margin: 0;
+			color: var(--muted);
+			line-height: 1.7;
+		}
+	</style>
+</head>
+<body>
+	<header class="navbar">
+		<div class="nav-wrap">
+			<a href="{{ url_for('home') }}" class="brand">PlantCare AI</a>
+			<nav class="nav-links">
+				<a href="{{ url_for('home') }}">Home</a>
+				<a class="active" href="{{ url_for('about') }}">About</a>
+				<a href="{{ url_for('upload_page') }}">Upload</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="container">
+		<section class="card">
+			<h1>About PlantCare AI</h1>
+			<p>
+				PlantCare AI is designed to support modern agriculture by providing fast and reliable
+				plant disease classification from leaf images. The platform helps reduce diagnosis time
+				and enables timely treatment decisions.
+			</p>
+		</section>
+
+		<section class="card">
+			<h2>Mission</h2>
+			<p>
+				Our mission is to make AI-driven plant health diagnostics accessible for farmers,
+				home gardeners, and agricultural learners through a simple and practical interface.
+			</p>
+		</section>
+
+		<section class="card">
+			<h2>Technology Stack</h2>
+			<ul>
+				<li>Transfer Learning with MobileNetV2</li>
+				<li>Fine-tuned model trained on 87,000+ annotated images</li>
+				<li>38 plant disease classes including healthy conditions</li>
+				<li>Flask backend with HTML, CSS, and JavaScript frontend</li>
+			</ul>
+		</section>
+
+		<section class="card">
+			<h2>Why Transfer Learning?</h2>
+			<p>
+				Transfer learning reuses useful visual features learned from large image datasets,
+				improving model performance while reducing training time and computational cost.
+			</p>
+		</section>
+	</main>
+</body>
+</html>
